@@ -6,26 +6,26 @@
  */ 
 /**********************************************************************
 
-	mian_header.h includerar samtliga headers för alla includerade funtioner.
+	mian_header.h includerar samtliga headers fÃ¶r alla includerade funtioner.
 	
 **********************************************************************/
 #include "main_header.h"
 
 
 static  uint16_t blink_speed_ms; /*blink hastighet i milesecunder*/
-static bool led_enabeld;		 /*varabel som bestämmer om leds skall blinka eller inte*/
+static bool led_enabeld;		 /*varabel som bestÃ¤mmer om leds skall blinka eller inte*/
 static bool direktion;			 /*anger vilken riktning som dioderna skall blinka*/
-static uint8_t counter;          /*räknar antal gånger dioderna har varit tända*/
+static uint8_t counter;          /*rÃ¤knar antal gÃ¥nger dioderna har varit tÃ¤nda*/
 
 /**********************************************************************
 
 	ISR (PCINT0_vect): avbrytter vid intryckning av trycknappen ansluten till pin 13.
 					   led_enabel togglas.
-					   om leds blinkar så släcks dom och räknaren ökar med 1.
+					   om leds blinkar sÃ¥ slÃ¤cks dom och rÃ¤knaren Ã¶kar med 1.
 	
 **********************************************************************/
 ISR (PCINT0_vect){
-	if(button_is_pressed(&b1))
+	if(!button_is_pressed(&b1))
 	{
 		if (led_enabeld == true) 
 		{
@@ -39,19 +39,19 @@ ISR (PCINT0_vect){
 /**********************************************************************
 
 	*mian: program som blinkar med hastigheten 100 milisekunder som ges av blink_speed_ms
-		   leds framåt och backåt vid intryckning av trycknappen ansluten till pin 13. 
-		   När ledsen har tänds och släckts 5 gånger så ändrar blinkningen ricktning.
+		   leds framÃ¥t och backÃ¥t vid intryckning av trycknappen ansluten till pin 13. 
+		   NÃ¤r ledsen har tÃ¤nds och slÃ¤ckts 5 gÃ¥nger sÃ¥ Ã¤ndrar blinkningen ricktning.
 		   
-		   -blink_speed_ms: anger hastigheten på blinkningen.
+		   -blink_speed_ms: anger hastigheten pÃ¥ blinkningen.
 		   
-		   -counter:  räknar hur många gånger som dioderna har tändits och släckts i en ricktning
-				      nollstäls när dioden dioderna tänds och släckts 5 gånger.
+		   -counter:  rÃ¤knar hur mÃ¥nga gÃ¥nger som dioderna har tÃ¤ndits och slÃ¤ckts i en ricktning
+				      nollstÃ¤ls nÃ¤r dioden dioderna tÃ¤nds och slÃ¤ckts 5 gÃ¥nger.
 		   
-		   -led_enabeld: när dena varabel är true så blinkar dioderna.
+		   -led_enabeld: nÃ¤r dena varabel Ã¤r true sÃ¥ blinkar dioderna.
 		   
 		   -direktion: anger i vilken ricktging som dioderna blinkar.
-					   vid true så blinkar dom från högsta pin till lägsta.
-					   vis false så blinkar dom från lägsta till högsta.
+					   vid true sÃ¥ blinkar dom frÃ¥n hÃ¶gsta pin till lÃ¤gsta.
+					   vis false sÃ¥ blinkar dom frÃ¥n lÃ¤gsta till hÃ¶gsta.
 		   
 	
 **********************************************************************/
